@@ -1,9 +1,8 @@
 ---
 title: 博客搭建流程
 date: 2022-07-14 23:25:00
-# img: /source/images/xxx.jpg
+# img: /source/images/xxx.jpg,featureImages 中的某个值
 summary: 我姥姥看了都会的博客搭建流程。
-categories: Blog
 tags:
   - 教程
 ---
