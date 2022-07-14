@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, John&#39;s Blog">
-    <meta name="description" content="first test
-">
+    <meta name="keywords" content="博客搭建流程, John&#39;s Blog">
+    <meta name="description" content="​	简单记录一下博客的搭建流程，都是采用现成的框架，操作起来并不复杂。之前碰到过一些奇怪的问题，后来也慢慢的也找到问题了，现在有时间来记录一下流程。
+​	Hexo 是一个快速、简洁且高效的博客框架，重点是使用简单并且完全免费。在官网可以找到">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>Hello World | John&#39;s Blog</title>
+    <title>博客搭建流程 | John&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -244,12 +244,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">博客搭建流程</h1>
                 </div>
             </div>
         </div>
@@ -377,7 +377,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-07-14
+                    2022-07-13
                 </div>
                 
 
@@ -411,7 +411,124 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>first test</p>
+                <p>​	简单记录一下博客的搭建流程，都是采用现成的框架，操作起来并不复杂。之前碰到过一些奇怪的问题，后来也慢慢的也找到问题了，现在有时间来记录一下流程。</p>
+<p>​	Hexo 是一个快速、简洁且高效的博客框架，重点是使用简单并且完全免费。在官网可以找到详细的说明（ <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a> ）。</p>
+<h3 id="搭建流程："><a href="#搭建流程：" class="headerlink" title="搭建流程："></a>搭建流程：</h3><h4 id="首先需要安装以下两个软件："><a href="#首先需要安装以下两个软件：" class="headerlink" title="首先需要安装以下两个软件："></a>首先需要安装以下两个软件：</h4><ul>
+<li>安装 node.js （建议版本12.0及以上）</li>
+<li>安装 git</li>
+</ul>
+<p>以上两个软件的安装步骤在网上很简单就能找到，在这里不赘述。</p>
+<h4 id="安装Hexo框架："><a href="#安装Hexo框架：" class="headerlink" title="安装Hexo框架："></a>安装Hexo框架：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>一般不会出现什么问题，如果出现了问题，可以参照官网的文档进行解决。</p>
+<p>安装完成后，可以通过两种方式执行Hexo指令：</p>
+<ol>
+<li><code>npx hexo &lt;command&gt;</code></li>
+<li>添加环境变量，将Hexo所在目录下的<code>node_modules</code>添加到环境变量中，即可直接使用<code>hexo &lt;command&gt;</code>。</li>
+</ol>
+<h4 id="生成博客："><a href="#生成博客：" class="headerlink" title="生成博客："></a>生成博客：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx hexo init <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+<span class="token builtin class-name">cd</span> <span class="token operator">&lt;</span>folder<span class="token operator">></span>
+<span class="token function">npm</span> <span class="token function">install</span>
+npx hexo server  <span class="token comment"># server 可以简化为 s</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>执行完以上命令后可以通过本地浏览器直接访问 <a href="http://localhost:4000。">http://localhost:4000。</a></p>
+<h4 id="更换主题："><a href="#更换主题：" class="headerlink" title="更换主题："></a>更换主题：</h4><p>​	通过上面的步骤，在本地访问应该可以初步看到网站的雏形。在网站的样式和主题方面Hexo可玩性很高，可以在网上寻找自己喜欢的主题并且替换上，就我用的主题来举例：</p>
+<p>​	该主题的详细介绍都在源码的自述文件中，包括一些配置和样式修改方法，都有详细的讲解，熟悉 js 的可能事半功倍，建议在更换完成后看一下该主题的自述文件讲解。</p>
+<blockquote>
+<p>主题名称：hexo-theme-matery</p>
+<p>示例网站：<a target="_blank" rel="noopener" href="http://blinkfox.com/">http://blinkfox.com/</a></p>
+<p>主题源码：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md</a></p>
+</blockquote>
+<p>​	步骤：</p>
+<blockquote>
+<ol>
+<li>在 themes 文件夹下，可以先清空该文件夹自带的文件，然后使用 git clone 命令来下载该主题：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/blinkfox/hexo-theme-matery.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>在根目录的配置文件 <code>_config.yml</code> 中将 theme 的值由  <code>landscape</code> 改为 <code>hexo-theme-matery</code>（与刚下载的主题文件夹的名称一致）；</li>
+<li>可以将根目录下的 <code>config.landscape.yml</code> 文件删除；</li>
+<li>将 <code>themes/hexo-theme-matery</code> 文件夹中的 <code>.git</code> 文件夹删除；</li>
+<li>更改语言为中文：在根目录的配置文件 <code>_config.yml</code> 中将 <code>language</code> 的值改为 <code>zh-CN</code>；</li>
+<li>以上步骤执行完后，重新运行服务可以确认主题是否更换成功。</li>
+</ol>
+</blockquote>
+<h4 id="通过-Github-部署："><a href="#通过-Github-部署：" class="headerlink" title="通过 Github 部署："></a>通过 Github 部署：</h4><blockquote>
+<p>​	本来可以通过 Travis 自动进行集成部署的，每次只要 push 到远程仓库就可以了，但是现在 Travis 好像免费的名额用完了，不选择收费的 plan 做不到自动部署，只能选择手动进行部署了，也不算复杂，多两个命令而已。</p>
+</blockquote>
+<ol>
+<li>在 Github 创建账号，并新建一个 repository，你的 repository 应该直接命名为 &lt;你的 Github 用户名&gt;.github.io。</li>
+<li>将你的 Hexo 站点文件夹推送到 repository 中。不要将 public 目录推送到repository 中，检查.gitignore文件中是否包含 public 一行，如果没有请加上。</li>
+<li>在博客的根目录执行以下命令：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"init"</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token operator">&lt;</span>你创建的仓库的连接<span class="token operator">></span>
+<span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>安装 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a> ：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="5">
+<li>此时远程仓库的 <code>master</code> 分支是我们的源代码，但是还需要将博客的页面单独生成一个分支，在博客根目录  <code>_config.yml</code> 中更改如下配置：</li>
+</ol>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> &lt;仓库地址<span class="token punctuation">></span>
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> blog  <span class="token comment"># 这里是可以自定义的</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="6">
+<li>将以上更改提交到远程仓库；</li>
+<li>执行以下命令：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean  <span class="token comment"># 清除缓存文件</span>
+hexo generate  <span class="token comment"># 构建静态文件，gnerate 可简写为 g</span>
+hexo deploy  <span class="token comment"># 部署网站，deploy 可简写为 d</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol start="8">
+<li>此时 Github 的 <code>Action</code> 中应该已经开始部署了，并且你的仓库自动生成了 <code>blog</code> 分支，本次部署肯定会失败，先不管它，在仓库的 <code>Settings</code> 中找到 <code>Pages</code> 选项，在其中的 <code>Source</code> 下面可以选择你的页面是由哪个分支部署，此时选择 <code>blog</code> ，并且点击 <code>Save</code> 按钮。</li>
+<li>再观察 <code>Action</code> 中部署任务，本次成功后就可以直接在线访问你的博客网站了。</li>
+<li>关于文章的撰写和修改，只需要在 <code>source\_post</code> 文件夹下新建或者修改 <code>.md</code> 文件，保存后执行步骤 7 的命令即可。</li>
+</ol>
+<blockquote>
+<p>​	源代码跟网页的代码不属同一分支，所以在 <code>master</code> 分支执行完部署命令后，定期还是将源代码 push 一下的好。</p>
+</blockquote>
+<h4 id="通过-Travis-CI-部署"><a href="#通过-Travis-CI-部署" class="headerlink" title="通过 Travis CI 部署:"></a><del>通过 Travis CI 部署</del>:</h4><ol>
+<li><del>在 Github 创建账号，并新建一个 repository，你的 repository 应该直接命名为 &lt;你的 Github 用户名&gt;.github.io。</del></li>
+<li><del>将你的 Hexo 站点文件夹推送到 repository 中。不要将 public 目录推送到repository 中，检查.gitignore文件中是否包含 public 一行，如果没有请加上。</del></li>
+<li><del>将 <a target="_blank" rel="noopener" href="https://github.com/marketplace/travis-ci">Travis CI</a> 添加到你的 GitHub 账户中。</del></li>
+<li><del>前往 GitHub 的 <a target="_blank" rel="noopener" href="https://github.com/settings/installations">Applications settings</a>，配置 Travis CI 权限，使其能够访问你的 repository。</del></li>
+<li><del>GitHub 新建 <a target="_blank" rel="noopener" href="https://github.com/settings/tokens">Personal Access Token</a>，只勾选 repo 的权限并生成一个新的 Token。</del></li>
+<li><del>回到 <a target="_blank" rel="noopener" href="https://github.com/marketplace/travis-ci">Travis CI</a>，前往你的 repository 的设置页面，在 Environment Variables 下新建一个环境变量，Name 为 <code>GH_TOKEN</code>，Value 为刚才你在 GitHub 生成的 Token。确保 DISPLAY VALUE IN BUILD LOG 保持 不被勾选 避免你的 Token 泄漏。点击 Add 保存。</del></li>
+<li><del>在你的 Hexo 站点文件夹中新建一个 .travis.yml 文件：</del></li>
+</ol>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">sudo</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+<span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token number">10</span> <span class="token comment"># use nodejs v10 LTS</span>
+<span class="token key atrule">cache</span><span class="token punctuation">:</span> npm
+<span class="token key atrule">branches</span><span class="token punctuation">:</span>
+  <span class="token key atrule">only</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> master <span class="token comment"># build master branch only</span>
+<span class="token key atrule">script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> hexo generate <span class="token comment"># generate static files</span>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> pages
+  <span class="token key atrule">skip-cleanup</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">github-token</span><span class="token punctuation">:</span> $GH_TOKEN
+  <span class="token key atrule">keep-history</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">on</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
+  <span class="token key atrule">local-dir</span><span class="token punctuation">:</span> public<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="8">
+<li><del>将 .travis.yml 推送到 repository 中。Travis CI 应该会自动开始运行，并将生成的文件推送到同一 repository 下的 gh-pages 分支下</del></li>
+<li><del>在 GitHub 中前往你的 repository 的设置页面，修改 GitHub Pages 的部署分支为 gh-pages。</del></li>
+</ol>
 
                 
             </div>
@@ -438,7 +555,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://johnsmith947.github.io/2022/07/14/hello-world/">https://johnsmith947.github.io/2022/07/14/hello-world/</a>
+                    <a href="https://johnsmith947.github.io/2022/07/13/blog/">https://johnsmith947.github.io/2022/07/13/blog/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -526,13 +643,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/07/14/hello-world/">
+                <a href="/2022/07/13/blog/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="博客搭建流程">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">博客搭建流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -543,7 +660,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
                             </span>
                         <span class="publish-author">
                             
@@ -564,13 +681,13 @@
                 本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/14/hello-world/">
+                <a href="/2022/07/13/blog/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="博客搭建流程">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">博客搭建流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -581,7 +698,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-13
                             </span>
                         <span class="publish-author">
                             
