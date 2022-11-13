@@ -1,0 +1,1397 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Git 相关笔记整理, John&#39;s Blog">
+    <meta name="description" content="Git 相关笔记整理前言：
+​	整理了日常工作开发中常用的 Git 相关知识，不断完善。
+一、提交规范​	Git 每次提交代码都需要写 commit message，否则就不允许提交，直接说明了 commit message 的重要性。co">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>Git 相关笔记整理 | John&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">John&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">John&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Git 相关笔记整理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-13
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-11-13
+                </div>
+                
+
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Git-相关笔记整理"><a href="#Git-相关笔记整理" class="headerlink" title="Git 相关笔记整理"></a>Git 相关笔记整理</h1><p>前言：</p>
+<p>​	整理了日常工作开发中常用的 Git 相关知识，不断完善。</p>
+<h2 id="一、提交规范"><a href="#一、提交规范" class="headerlink" title="一、提交规范"></a>一、提交规范</h2><p>​	Git 每次提交代码都需要写 commit message，否则就不允许提交，直接说明了 commit message 的重要性。commit message 应该说明白本次提交的目的以及作了何种操作。</p>
+<p><strong>commit message 格式</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>type<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token generics"><span class="token punctuation">&lt;</span>scope<span class="token punctuation">&gt;</span></span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token generics"><span class="token punctuation">&lt;</span>subject<span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><p><strong>type：用于说明 git commit 的类别，只允许使用下面的标识：</strong></p>
+<ul>
+<li>feat：新功能（feature）。</li>
+<li>fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。</li>
+<li>fix：产生diff并自动修复此问题。适合于一次提交直接修复问题</li>
+<li>to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix</li>
+<li>docs：文档（documentation）。</li>
+<li>style：格式（不影响代码运行的变动）。</li>
+<li>refactor：重构（即不是新增功能，也不是修改bug的代码变动）。</li>
+<li>perf：优化相关，比如提升性能、体验。</li>
+<li>test：增加测试。</li>
+<li>chore：构建过程或辅助工具的变动。</li>
+<li>revert：回滚到上一个版本。</li>
+<li>merge：代码合并。</li>
+<li>sync：同步主线或分支的Bug。</li>
+</ul>
+</li>
+<li><p><strong>scope（可选）：scope用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。也可以写当前需求的名称。</strong></p>
+</li>
+<li><p><strong>subject(必须)：subject是commit目的的简短描述，不超过50个字符。</strong></p>
+<ul>
+<li>建议使用中文</li>
+<li>结尾不加句号或其他标点符号</li>
+</ul>
+</li>
+<li><p><strong>示例：</strong></p>
+<ul>
+<li>feat(员工管理系统):增加数据层接口</li>
+<li>fix(控制层):修复日志输出bug</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、代码回滚"><a href="#二、代码回滚" class="headerlink" title="二、代码回滚"></a>二、代码回滚</h2><h3 id="用-IDEA-回滚代码"><a href="#用-IDEA-回滚代码" class="headerlink" title="用 IDEA 回滚代码"></a>用 IDEA 回滚代码</h3><h4 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h4><ul>
+<li>当前的两次提交：</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3b598a0909cf4a429254f261a46a4998~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>在 git log 里，复制 <code>当前版本（提交错误的版本）</code> 及 <code>目标版本</code> 的版本号，并记录下来，如：</li>
+</ul>
+<blockquote>
+<p>当前版本：d6c98d607b05127f80de8d5b360cf7f588df9c0e</p>
+<p>目标版本：baba3e15ea9ebdcc50629a42791385591af4ff3c</p>
+</blockquote>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ac4cb42c50444c3a99f6d346961130e9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>右击项目或者在菜单栏点击 Git 菜单，点击 Reset HEAD…</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/235d8571576846298af4e02da18f0b0a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>在弹出的输入框内选择 Reset Type 为 <code>Hard</code>，To  Commit 输入框输入<code>目标版本</code>的版本号：</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7a7ff174911d4e91b0e7b469be9789a0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>点击 Reset 后，代码会回到目标版本的样子，此时无法正常 push 到远程，如果强推的话，有些公司并不允许。所以应该再作一次如上操作：右击项目或者在菜单栏点击 Git 菜单，点击 Reset HEAD…，在弹出的输入框内选择 Reset Type 为 <code>Mixed</code>，To  Commit 输入框输入 <code>当前版本</code> 的版本号：</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5a5725c6c6d84302b13e14f3f9cf13b2~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>点击 Reset 后，发现待提交有了文件并且可以 commit 和 push 了，虽然会留下记录，但是达到了回滚代码的目的。</li>
+</ul>
+<h4 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h4><ul>
+<li>当前的两次提交：</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1a4310a74ba4aaa81ef1943635bffdb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>目的：回到“最初的”这个版本。在 git 中右击“最初的”这个版本，选择图上所示选项：</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1449f7fd4e5c4ba49e68910b307676c8~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>出现如下对话框：</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f06ff9d007e142b1afcfabad851d4526~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>简单来理解，选择 Soft 或是 Mixed，只是将指针指向了目标提交，错误提交的代码仍然存在，但是在 IDEA 中，文件会以蓝色标识展示，代码则以绿色标识展示，这样可以比较下你这两次提交有哪些地方作了修改。</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e35d24a137964318afe51f6e90081a37~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>选择 Hard 或是 Keep，你的代码将会回退到你选中的那个版本的样子，没有任何标识。</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5695d98e0fb24dc3bc7cdc610ec37ac5~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>不管是四个选项中的哪一个，如果你的代码跟目标版本完全一致，将无法进行 push。关于这四个选项将在下面展开说。</li>
+</ul>
+<h4 id="第三种方式"><a href="#第三种方式" class="headerlink" title="第三种方式"></a>第三种方式</h4><ul>
+<li>当前的数次提交如下：</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c7432596d0b14380a45c618bc3059fef~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>假如第4次提交为错误提交，则在 git log 中右击该提交，选择 Revert Commit</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/38e831703cde495aa8f7d1d3380f9c08~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>直接撤销了这一次提交的代码，也会生成一条新的 commit，然后可直接 push 到远程仓库。</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/707a10836b5e45f0a25f287dba1bf6b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>另一种情况：已提交但是未 push 到远程仓库的情况下，如图所示，“来一下子”为错误提交</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1aa21e7719e4464f83656a61233851c6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>直接右击该提交，选择 Undo Commit</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/90a56439624b4215a9147d1f015e0e24~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>点击 OK</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14eceef07c274351959e033785e1ff79~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>你会发现上一次提交被移出了版本区，在 IDEA 中可以查看到该次提交所做的改变，方便对照。</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5163020db2db46f1843e45c23b95a06d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<h3 id="用命令行回滚代码"><a href="#用命令行回滚代码" class="headerlink" title="用命令行回滚代码"></a>用命令行回滚代码</h3><h4 id="第一种方式-1"><a href="#第一种方式-1" class="headerlink" title="第一种方式"></a>第一种方式</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看 git 提交的历史记录</span>
+<span class="token function">git</span> reflog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1560c37041a64721a9cac1ffe61d4b53~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 回退版本，commit_id 为 log 中最前面的数字字母组合</span>
+<span class="token function">git</span> revert -n <span class="token operator">&lt;</span>commit_id<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>这里分两种情况：</strong></p>
+<ul>
+<li><strong>撤销上一次提交</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 以上图为例，这里的 commit_id 为 HEAD 指向的当前版本</span>
+<span class="token function">git</span> revert -n 978bc9f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>这里类似 IDEA 回滚代码的第三种方式中的 Undo Commit一样的，后面修改完直接 push 就好。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1d7c19124f624e79901e74b81612e64d~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li><strong>回退到某个版本</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 还是图为例，这里的 commit_id 为 “123”的版本（在上图的基础上我又提交了好几次，所以123并不算上一次）</span>
+<span class="token function">git</span> revert -n f18bcd8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>​	可能会出现如下情况，文件发生冲突，=========上面的为当前版本的内容，下面为目标版本的内容，但是发现下面的内容并不是想要的“123”。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c37a9ef306a246d2a4d0097543530286~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<p>​	换个视角来看，在 IDEA 的解决冲突窗口中，左边为当前分支内容，中间是目标版本的内容，右边则是目标分支的上一个版本的内容。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a1011f2b9954404283a043f7c00bcecd~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<p>​	<strong>结论：</strong>由此可见，如果不通过看 IDEA 的解决冲突窗口来看，我们在命令行输入回退命令的时候应该选择“1234”那一条的 commit_id (978bc9f)，也就是目标版本的上一个版本，这样的话我们在文件中留下 ======= 下面的内容就可以了。</p>
+<p>​	如果是通过 IDEA 的解决冲突窗口来看，则正常选择目标版本的 commit_id，然后直接点击 Apply 按钮以中间的内容为准即可。</p>
+<h4 id="第二种方式-1"><a href="#第二种方式-1" class="headerlink" title="第二种方式"></a>第二种方式</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># HEAD 后面一个^表示上个版本，^^则表示上上个版本</span>
+<span class="token function">git</span> reset --hard HEAD^
+
+<span class="token comment"># 回退到指定的版本，git reflog 中的 commit_id</span>
+<span class="token function">git</span> reset --hard <span class="token operator">&lt;</span>commit_id<span class="token operator">&gt;</span>
+
+<span class="token comment"># n -&gt; 数字，输入1则表示上一个版本</span>
+<span class="token function">git</span> reset --hard HEAD~n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="单个文件回滚"><a href="#单个文件回滚" class="headerlink" title="单个文件回滚"></a>单个文件回滚</h3><p>​	在 IDEA 中可以使用 Git 的 History 功能来试试，下面展示用命令行方式回滚单个文件。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 保留本地代码，把所有文件的提交记录都取消，回滚到指定版本</span>
+<span class="token function">git</span> reset --soft <span class="token operator">&lt;</span>commit_id<span class="token operator">&gt;</span>
+
+<span class="token comment"># 从暂存区中把你需要回滚的文件移出去</span>
+<span class="token function">git</span> restore --staged ./README.md
+
+<span class="token comment"># 直接提交（原理可参照第三点中“撤销暂存区的文件”）</span>
+<span class="token function">git</span> commit -m <span class="token string">"message"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h2 id="三、Q-amp-A"><a href="#三、Q-amp-A" class="headerlink" title="三、Q&amp;A"></a>三、Q&amp;A</h2><h4 id="IDEA-终端-git-reflog-乱码"><a href="#IDEA-终端-git-reflog-乱码" class="headerlink" title="IDEA 终端 git reflog 乱码"></a>IDEA 终端 git reflog 乱码</h4><p>​	以下两种方式可解决，设置完毕后可能需要重启 IDE 或是电脑。</p>
+<ul>
+<li><strong>设置环境变量解决</strong></li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cbcd1b9a4d1741dd9ed232eb5c58aa56~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li><strong>临时解决</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 直接终端中输入后回车即可</span>
+<span class="token builtin class-name">set</span> <span class="token assign-left variable">LESSCHARSET</span><span class="token operator">=</span>utf-8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="Failed-to-connect-to-127-0-0-1-port-7890-after-2020-ms-Connection-refused"><a href="#Failed-to-connect-to-127-0-0-1-port-7890-after-2020-ms-Connection-refused" class="headerlink" title="Failed to connect to 127.0.0.1 port 7890 after 2020 ms: Connection refused"></a>Failed to connect to 127.0.0.1 port 7890 after 2020 ms: Connection refused</h4><p>​	在 push 代码的时候出现该错误，拒绝连接。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看是否使用代理</span>
+<span class="token function">git</span> config --global http.proxy
+
+<span class="token comment"># 如果有的话则取消该代理</span>
+<span class="token function">git</span> config --global --unset http.proxy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="OpenSSL-SSL-connect-Connection-was-reset-in-connection-to-github-com-443"><a href="#OpenSSL-SSL-connect-Connection-was-reset-in-connection-to-github-com-443" class="headerlink" title="OpenSSL SSL_connect: Connection was reset in connection to github.com:443"></a>OpenSSL SSL_connect: Connection was reset in connection to github.com:443</h4><p>​	一般情况下是挂了 VPN 可能会出现的错误，还是代理的问题。首先我们可以选择重启一下 git 终端尝试一下，可能与当前的会话有关系，如果不行的话则使用如下方法：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 设置一下代理端口号，假如端口号为 7890</span>
+<span class="token function">git</span> config --global http.proxy <span class="token number">127.0</span>.0.1:7890
+<span class="token function">git</span> config --global https.proxy <span class="token number">127.0</span>.0.1:7890
+
+<span class="token comment"># 如果已经有设置过代理，则输入以下命令取消后，再设置一次代理即可</span>
+<span class="token function">git</span> config --global --unset http.proxy
+<span class="token function">git</span> config --global --unset https.proxy
+
+<span class="token comment"># 查看 git 的 http 代理配置</span>
+<span class="token function">git</span> config --global http.proxy 
+<span class="token comment"># 查看 git的 https 代理配置</span>
+<span class="token function">git</span> config --global https.proxy
+<span class="token comment"># 查看 git 的所有配置</span>
+<span class="token function">git</span> config --global -l<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="工作区、暂存区、版本区"><a href="#工作区、暂存区、版本区" class="headerlink" title="工作区、暂存区、版本区"></a>工作区、暂存区、版本区</h4><ul>
+<li><p><strong>工作区</strong></p>
+<p>编辑代码的目录文件夹。</p>
+</li>
+<li><p><strong>暂存区</strong></p>
+<p>工作区中的文件使用 git add 命令后，就到了暂存区。</p>
+</li>
+<li><p><strong>版本区</strong></p>
+<p>暂存区中的文件使用 git commit 即可添加到版本区。</p>
+</li>
+</ul>
+<h4 id="git-reflog-和-git-log-的区别"><a href="#git-reflog-和-git-log-的区别" class="headerlink" title="git reflog 和 git log 的区别"></a>git reflog 和 git log 的区别</h4><ul>
+<li><p><strong>git reflog</strong></p>
+<p>可以查看<code>所有分支</code>的所有操作记录信息（<code>包括</code>已经被删除的 commit 记录和 reset 的操作）。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7624408f00624de79d62014f4fd0abda~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+<li><p><strong>git log</strong></p>
+<p>可以显示<code>当前分支</code>所有提交过的版本信息，<code>不包括</code>已经被删除的 commit 记录和 reset 的操作。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dc4ace53f42843a8aa19de79d18e7cad~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<p>直接使用 git log 显示内容过于繁琐，可以使用如下命令进行精简化显示。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log --pretty<span class="token operator">=</span>oneline<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/833f557f41784b39809a9b246d2e02c2~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+</ul>
+<h4 id="基于原分支复制新的分支"><a href="#基于原分支复制新的分支" class="headerlink" title="基于原分支复制新的分支"></a>基于原分支复制新的分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 切换到原分支</span>
+<span class="token function">git</span> checkout oldBranch
+<span class="token function">git</span> pull
+
+<span class="token comment"># 从原分支复制到新的分支</span>
+<span class="token function">git</span> checkout -b newBranch
+
+<span class="token comment"># 将新的分支推送到远程仓库并关联</span>
+<span class="token function">git</span> push --set-upstream origin newbranch
+<span class="token function">git</span> pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="Soft、Mixed、Hard、Keep的区别"><a href="#Soft、Mixed、Hard、Keep的区别" class="headerlink" title="Soft、Mixed、Hard、Keep的区别"></a>Soft、Mixed、Hard、Keep的区别</h4><p>​	回滚代码时的几个选项详解，建议先弄明白三大分区的概念。</p>
+<ul>
+<li><strong>Soft</strong><ul>
+<li>移动本地库 HEAD 指针</li>
+</ul>
+</li>
+<li><strong>Mixed</strong><ul>
+<li>移动本地库 HEAD 指针</li>
+<li>重置暂存区</li>
+</ul>
+</li>
+<li><strong>Hard</strong><ul>
+<li>移动本地库 HEAD 指针</li>
+<li>重置暂存区</li>
+<li>重置工作区</li>
+</ul>
+</li>
+<li><strong>Keep</strong><ul>
+<li>移动本地库 HEAD 指针</li>
+<li>暂存区不变</li>
+<li>重置工作区</li>
+</ul>
+</li>
+</ul>
+<h4 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h4><p>​	在 IDEA 中操作的话，直接点击该分支删除就好。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看所有分支（不加 -a 仅查看本地分支），-a 是 --all 的简写</span>
+<span class="token function">git</span> branch -a
+
+<span class="token comment"># 直接删除本地分支</span>
+<span class="token function">git</span> branch -d <span class="token operator">&lt;</span>branchName<span class="token operator">&gt;</span>
+
+<span class="token comment"># 如果本地要删除的分支和上游的分支不一致，可能会报如下错误：</span>
+<span class="token comment"># error: The branch 'newbranch' is not fully merged.</span>
+<span class="token comment"># 使用如下命令进行删除，-D 是 --delete --force 的缩写，这样可以在不检查 merge 状态的情况下删除分支；--force 简写 -f，作用是将当前 branch 重置到初始点(startpoint)，如果不使用 --force 的话，git 分支无法修改一个已经存在的分支</span>
+<span class="token function">git</span> branch -D <span class="token operator">&lt;</span>branchName<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 删除远程分支的时候你所在分支不能是要删除的那个分支，-d 是 --delete 的简写</span>
+<span class="token function">git</span> push origin -d branchName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="合并其他分支的某一次提交"><a href="#合并其他分支的某一次提交" class="headerlink" title="合并其他分支的某一次提交"></a>合并其他分支的某一次提交</h4><ul>
+<li><p><strong>IDEA 操作</strong></p>
+<p>当前是处于 test 分支，需要合并 newbranch 分支的“又一次新的提交”的内容，直接右击该提交选择 Cherry-pick 选项即可，有冲突则解决冲突。</p>
+</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df76df05eb28405bad53aaace3879459~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li><strong>命令行操作</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看所有分支的提交记录，找到要合并的那个分支的某一次提交的 commit_id</span>
+<span class="token function">git</span> reflog
+
+<span class="token comment"># 使用 Cherry-pick 进行合并，有冲突则解决冲突</span>
+<span class="token function">git</span> cherry-pick <span class="token operator">&lt;</span>commit_id<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="暂存正在编辑中的代码"><a href="#暂存正在编辑中的代码" class="headerlink" title="暂存正在编辑中的代码"></a>暂存正在编辑中的代码</h4><p>​	在当前分支进行开发时，正在编辑的文件还未提交至暂存区，这时需要切换到别的分支解决问题，可以使用 git stash 操作来进行缓存当前正在编辑中的内容。</p>
+<ul>
+<li><p><strong>IDEA 操作</strong></p>
+<ul>
+<li><p>当前未保存的内容</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60283479a28e4f6d905235745a3958b5~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+<li><p>将未提交的内容缓存至栈中</p>
+</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ad2f410f8654288853b37ad878d6437~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>输入 message 便于识别，点击 Create Stash，会发现当前编辑的内容消失了，此时会保存在栈中便于随时进行恢复，现在切换到其他分支就不会影响进一步开发</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e12becf6d214c50a7ec7ca9a830c1e5~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>当在另一个分支开发结束，会到原来的分支时，需要将刚才缓存的内容恢复</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39981b67b0dc4f6f8070aaa858a167a8~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>在弹出的对话框中选择你刚才保存的那个，点击 Apply Stash 即可恢复刚才编辑的内容。可勾选 Pop stash 将这一次保存的内容删除掉</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5e4c2e585f347d0b0a7ce85bd69b5f7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+<li><p><strong>命令行操作</strong></p>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 将未提交的内容缓存</span>
+<span class="token function">git</span> stash save <span class="token string">"message"</span>
+
+<span class="token comment"># 查看缓存的内容</span>
+<span class="token function">git</span> stash list
+
+<span class="token comment"># 恢复内容，但不会删除保存记录，可以使用 git stash apply stash@{0} 来恢复指定记录</span>
+<span class="token function">git</span> stash apply
+
+<span class="token comment"># 恢复内容，同时删除记录，可以使用 git stash pop stash@{0} 来恢复指定记录</span>
+<span class="token function">git</span> stash pop
+
+<span class="token comment"># 删除最新一条记录，可以使用 git stash drop stash@{0} 来删除指定记录</span>
+<span class="token function">git</span> stash drop
+
+<span class="token comment"># 清空保存记录</span>
+<span class="token function">git</span> stash <span class="token function">clear</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="合并其他分支的某一个文件"><a href="#合并其他分支的某一个文件" class="headerlink" title="合并其他分支的某一个文件"></a>合并其他分支的某一个文件</h4><p>​	假如当前在 feature 分支，需要合并 dev 分支的 README.md 文件。</p>
+<ul>
+<li><p><strong>IDEA 操作</strong></p>
+<ul>
+<li>直接选择需要合并的文件右击，选择如下选项</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/03cd3c36b11349888784c52f0f658107~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>可以很直观的看到两个文件的差别，点击中间的箭头或者自行修改即可。</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e351eaa14705425f8e382c421842b512~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+<li><p><strong>命令行操作</strong></p>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这样做直接会把 dev 分支的 README.md 文件覆盖过来，后面的步骤就正常 add -&gt; commit -&gt; push 即可</span>
+<span class="token comment"># 如果是多个文件，可以在 .\README.md 后面继续写文件名，空格分隔</span>
+<span class="token function">git</span> checkout dev .<span class="token punctuation">\</span>README.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="分支的重命名"><a href="#分支的重命名" class="headerlink" title="分支的重命名"></a>分支的重命名</h4><ul>
+<li><p><strong>本地分支</strong></p>
+<p>IDEA 可以直接在分支切换处进行 Rename。</p>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch -m <span class="token operator">&lt;</span>oldName<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>newName<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><strong>远程分支</strong></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 修改本地分支名称</span>
+<span class="token function">git</span> branch -m <span class="token operator">&lt;</span>oldName<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>newName<span class="token operator">&gt;</span>
+
+<span class="token comment"># 删除远程分支</span>
+<span class="token function">git</span> push origin -d <span class="token operator">&lt;</span>oldName<span class="token operator">&gt;</span>
+
+<span class="token comment"># 将修改好名字的分支推送到远程</span>
+<span class="token function">git</span> push --set-upstream origin newName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="撤销暂存区的文件"><a href="#撤销暂存区的文件" class="headerlink" title="撤销暂存区的文件"></a>撤销暂存区的文件</h4><p>​	以下两个命令在 git status 命令下，会有提示。</p>
+<ul>
+<li><p><strong>git restore –staged <file></file></strong></p>
+<p>​	将文件从暂存区移出至工作区，且保留文件的最后一次修改。</p>
+<ul>
+<li>已经提交至暂存区</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76789a746411430996bbc150850ffe56~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>使用 git restore –staged ./README.md 命令后，该文件将从暂存区移出，此时如果进行 commit 命令的话，该文件将不会提交至版本库。</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e818c72798ea4e6087c71b344f086a62~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+</li>
+<li><p><strong>git restore <file></file></strong></p>
+<p>​	已经在暂存区的文件进行了修改后，可以通过该命令，撤销本次修改，文件的内容将会改变。</p>
+<ul>
+<li>已经在暂存区的文件进行了修改的情况，图上的提示也很明显。</li>
+</ul>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75eb7d836ad4d7694308d05b1499f13~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<ul>
+<li>此时如果使用 git restore ./README.md 命令，该文件将会撤销这次修改。</li>
+</ul>
+</li>
+</ul>
+<h4 id="强制推送"><a href="#强制推送" class="headerlink" title="强制推送"></a>强制推送</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin HEAD --force
+
+<span class="token function">git</span> push -f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="查看分支与上游分支的关联情况"><a href="#查看分支与上游分支的关联情况" class="headerlink" title="查看分支与上游分支的关联情况"></a>查看分支与上游分支的关联情况</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> branch -vv<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">John Smith</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://johnsmith947.github.io/2022/11/13/git/">https://johnsmith947.github.io/2022/11/13/git/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">John Smith</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2022/11/13/git/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Git 相关笔记整理">
+                        
+                        <span class="card-title">Git 相关笔记整理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Smith
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/30/ideaskills/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="IDEA Skills">
+                        
+                        <span class="card-title">IDEA Skills</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Smith
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">John Smith</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis"><!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+ -->
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
